@@ -6,10 +6,13 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "https://fonts.googleapis.com/css2?family=Pacifico&display=swap", "data-turbo-track": "reload" %>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <main class="p-5 h-screen w-screen">
+      <%= yield %>
+    </main>
   </body>
 </html>
