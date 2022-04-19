@@ -13,3 +13,28 @@
  *= require_tree .
  *= require_self
  */
+@font-face {
+  font-family: "Proxima-Nova";
+  src: url("../fonts/Proxima.otf");
+}
+
+
+body {
+  font-family: 'Proxima-Nova', sans-serif;
+}
+
+.ff-pacifico {
+  font-family: 'Pacifico', cursive;
+}
+
+.background-blue {
+  background-color: #3778c2;
+}
+
+.blue {
+  color: #3778c2;
+}
+
+/* body {
+  background-color: #3778c2 !important;
+} */
