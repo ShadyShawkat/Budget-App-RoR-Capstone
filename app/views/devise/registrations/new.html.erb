@@ -1,33 +1,30 @@
-<h2>Sign up</h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+  <div class="background-blue flex justify-between p-3 items-center text-white">
+    <%= link_to unauthenticated_root_path do %>
+      <i class="fa-solid fa-arrow-left text-lg"></i>
+    <% end %>
+
+    <h2 class="font-bold">REGISTER</h2>
+    <div class="actions">
+      <%= f.submit "Next", class: "text-slate-200" %>
+    </div>
+  </div>
+
+  <div class="field mt-4">
+    <%= f.text_field :name, placeholder: "Name", autofocus: true, class: "border border-slate-200 w-full outline-0 px-2 py-1" %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.email_field :email, placeholder: "Email", autocomplete: "email", class: "border border-slate-200 w-full outline-0 px-2 py-1" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, placeholder: "Password", autocomplete: "new-password", class: "border border-slate-200 w-full outline-0 px-2 py-1" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.password_field :password_confirmation, placeholder: "Confirm password", autocomplete: "new-password", class: "border border-slate-200 w-full outline-0 px-2 py-1" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= render "devise/shared/error_messages", resource: resource %>
