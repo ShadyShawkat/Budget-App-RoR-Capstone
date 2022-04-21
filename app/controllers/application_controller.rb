@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   before_action :update_allowed_parameters, if: :devise_controller?
 
+  def current_path
+    url_for(request.fullpath)
+  end
+  
   protected
 
   def update_allowed_parameters
