@@ -1,0 +1,23 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+  <div class="background-blue flex justify-between p-3 items-center text-white">
+    <%= link_to unauthenticated_root_path do %>
+      <i class="fa-solid fa-arrow-left text-lg"></i>
+    <% end %>
+
+    <h2 class="font-bold">LOGIN</h2>
+    <div class="actions">
+      <%= f.submit "Log in", class: "text-slate-200" %>
+    </div>
+  </div>
+
+  <div class="field mt-4">
+    <%= f.email_field :email, placeholder: "Email", autofocus: true, autocomplete: "email", class: "border border-slate-200 w-full outline-0 px-2 py-1"%>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password, placeholder: "Password", autocomplete: "current-password", class: "border border-slate-200 w-full outline-0 px-2 py-1"%>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

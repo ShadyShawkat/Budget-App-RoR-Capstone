@@ -1,0 +1,27 @@
+<%= form_with(model: category, class: "h-full flex flex-col justify-between") do |form| %>
+  <div>
+    <div class="mt-4">
+      <%= form.text_field :name, placeholder: "Name", autofocus: true, class: "border border-slate-200 w-full outline-0 px-2 py-1" %>
+    </div>
+
+    <div>
+      <%= form.text_field :icon, placeholder: "Icon URL", class: "border border-slate-200 w-full outline-0 px-2 py-1" %>
+    </div>
+  </div>
+  
+  <% if category.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+        <% category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="background-green p-3">
+    <%= form.submit "Add Category", class: "w-full text-white rounded-md text-center py-2 border-2 font-bold boreder-white" %>
+  </div>
+<% end %>

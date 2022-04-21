@@ -1,0 +1,29 @@
+<%= form_with(model: payment, class: "h-full flex flex-col") do |form| %>
+  <div>
+    <%= form.text_field :name, placeholder: "Name", autofocus: true, class: "border border-slate-200 w-full outline-0 px-2 py-1 mt-3" %>
+  </div>
+
+  <div>
+    <%= form.number_field :amount, placeholder: "Amount", class: "border border-slate-200 w-full outline-0 px-2 py-1" %>
+  </div>
+
+  <div>
+    <%= form.select :category_ids, @user_categories.collect {|cat| [cat.name, cat.id]}, { include_blank: false }, required: true, class:"py-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", multiple: true %>
+  </div>
+
+  <% if payment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+        <% payment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="background-green p-3 mt-auto">
+    <%= form.submit "Add Payment", class: "w-full text-white rounded-md text-center py-2 border-2 font-bold boreder-white" %>
+  </div>
+<% end %>

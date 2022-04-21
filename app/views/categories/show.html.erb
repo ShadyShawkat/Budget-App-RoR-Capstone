@@ -1,0 +1,27 @@
+<div class="h-full flex flex-col">
+  <div class="flex border bg-white rounded-lg overflow-hidden h-14 mb-5">
+    <div class="grow">
+      <%= render @category %>
+    </div>
+  </div>
+
+  <div id="payments">
+    <ul class="px-3 gap-2 flex flex-col">
+      <% @category.payments.each do |payment| %>
+        <li class="flex items-center h-full gap-2 bg-white px-3 rounded overflow-hidden h-12">
+            <p class="font-bold grow">
+              <%= payment.name %>
+            </p>
+            <div class="mr-1 text-xs font-bold text-gray-600 flex flex-col text-right">
+              <span><%= payment.amount %> $</span>
+              <span><%= payment.created_at.to_date %></span>
+            </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="background-green p-3 mt-auto">
+    <%= link_to "New payment", new_payment_path, class: "text-white border-2 border-white w-full block text-center py-2 rounded-sm font-bold" %>
+  </div>
+</div>

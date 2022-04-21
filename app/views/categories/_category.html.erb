@@ -1,0 +1,11 @@
+<div id="<%= dom_id category %>" class="flex items-center h-full gap-2">
+  <div class="w-14 h-full">
+    <img class="w-full h-full" src="<%= category.icon %>">
+  </div>
+  <p class="font-bold grow">
+    <%= category.name %>
+  </p>
+  <p class="mr-1 text-xs font-bold text-gray-500">
+    <%= category.payments.sum(:amount) %> $
+  </p>
+</div>

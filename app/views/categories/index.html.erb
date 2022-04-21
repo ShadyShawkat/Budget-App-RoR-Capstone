@@ -1,0 +1,21 @@
+<div class="h-full flex flex-col justify-between">
+  <ul id="categories" class="flex flex-col grow p-2 mt-2 gap-2">
+    <% @categories.each do |category| %>
+      <li class="flex border bg-white rounded-lg overflow-hidden h-14">
+        <%= link_to category, class: "grow" do %>
+          <%= render category %>
+        <% end %>
+        <div class="self-end bg-red-700 h-full flex justify-center items-center w-14">
+          <%= button_to category, method: :delete do %>
+            <i class="fa-solid fa-trash-can text-white text-xl"></i>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="background-green p-3">
+    <%= link_to "New category", new_category_path, class: "text-white border-2 border-white w-full block text-center py-2 rounded-sm font-bold" %>
+  </div>
+</div>
+
