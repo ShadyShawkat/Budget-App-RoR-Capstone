@@ -61,7 +61,7 @@ class PaymentsController < ApplicationController
     @category = category_params
 
     respond_to do |format|
-      format.html { redirect_to category_url(@category), notice: 'Payment was successfully destroyed.' }
+      format.html { redirect_to categories_url, notice: 'Payment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
