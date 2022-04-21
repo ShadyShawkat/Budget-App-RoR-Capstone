@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def current_path
     url_for(request.fullpath)
   end
-  
+
   protected
 
   def update_allowed_parameters

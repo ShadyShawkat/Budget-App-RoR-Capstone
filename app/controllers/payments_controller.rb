@@ -78,7 +78,7 @@ class PaymentsController < ApplicationController
     params.require(:payment).permit(:name, :amount, category_ids: [])
   end
 
-  def category_params 
+  def category_params
     params.permit(:id)
   end
 end
