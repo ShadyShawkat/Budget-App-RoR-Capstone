@@ -8,17 +8,13 @@
   <div id="payments">
     <ul class="px-3 gap-2 flex flex-col">
       <% @category.payments.each do |payment| %>
-        <li class="flex items-center h-full gap-2 bg-gray-600 pl-3 rounded overflow-hidden h-12">
-            <p class="font-bold grow text-white">
+        <li class="flex items-center h-full gap-2 bg-white px-3 rounded overflow-hidden h-12">
+            <p class="font-bold grow">
               <%= payment.name %>
             </p>
-            <p class="mr-1 text-xs font-bold text-gray-400">
-              <%= payment.amount %> $
-            </p>
-            <div class="bg-red-700 h-full flex justify-center items-center w-12">
-              <%= button_to payment, method: :delete do %>
-                <i class="fa-solid fa-trash-can text-white text-xl"></i>
-              <% end %>
+            <div class="mr-1 text-xs font-bold text-gray-600 flex flex-col text-right">
+              <span><%= payment.amount %> $</span>
+              <span><%= payment.created_at.to_date %></span>
             </div>
         </li>
       <% end %>
