@@ -1,10 +1,31 @@
-<p style="color: green"><%= notice %></p>
+<div class="h-full flex flex-col">
+  <div class="flex border bg-white rounded-lg overflow-hidden h-14 mb-5">
+    <div class="grow">
+      <%= render @category %>
+    </div>
+  </div>
 
-<%= render @category %>
+  <div id="payments">
+    <ul class="px-3 gap-2 flex flex-col">
+      <% @category.payments.each do |payment| %>
+        <li class="flex items-center h-full gap-2 bg-gray-600 pl-3 rounded overflow-hidden h-12">
+            <p class="font-bold grow text-white">
+              <%= payment.name %>
+            </p>
+            <p class="mr-1 text-xs font-bold text-gray-400">
+              <%= payment.amount %> $
+            </p>
+            <div class="bg-red-700 h-full flex justify-center items-center w-12">
+              <%= button_to payment, method: :delete do %>
+                <i class="fa-solid fa-trash-can text-white text-xl"></i>
+              <% end %>
+            </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
-<div>
-  <%= link_to "Edit this category", edit_category_path(@category) %> |
-  <%= link_to "Back to categories", categories_path %>
-
-  <%= button_to "Destroy this category", @category, method: :delete %>
+  <div class="background-green p-3 mt-auto">
+    <%= link_to "New payment", new_payment_path, class: "text-white border-2 border-white w-full block text-center py-2 rounded-sm font-bold" %>
+  </div>
 </div>

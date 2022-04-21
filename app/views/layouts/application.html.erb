@@ -8,14 +8,56 @@
 
     <%= stylesheet_link_tag "application", "https://fonts.googleapis.com/css2?family=Pacifico&display=swap", "data-turbo-track": "reload" %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.2/dist/flowbite.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
   </head>
 
-  <body class="h-screen w-screen bg-gray-200">
+  <body class="h-screen w-screen bg-gray-200 flex flex-col">
     <% if user_signed_in? %>
-      <%= button_to "Sign out", destroy_user_session_path, :method => :delete, class: 'btn btn-danger'%>
+      <nav class="border-gray-200 px-2 sm:px-4 py-1 background-blue text-white">
+        <div class="container flex flex-wrap justify-between items-center mx-auto">
+          <button class="p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:text-blue-400 dark:hover:bg-blue-700 dark:focus:ring-blue-600" id="hamburgerMenuBtn">
+            <i class="fa-solid fa-bars text-xl text-white"></i>        
+          </button>
+          <span>
+            <%= 'Categories' if request.path == "/categories" %>
+            <%= 'New ' if request.path == "/categories/new" %>
+            <%= 'Category' if request.path.include? "/categories/" %>
+            <%= 'New Payment' if request.path.include? "/payments/" %>
+          </span>
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <div class="fixed backdrop-blur transition-all -translate-x-full w-screen h-screen bg-red inset-0" id="mobile-menu-backdrop">
+            <div class="w-3/5 fixed md:block h-screen background-blue inset-0 border-r-2 border-slate-400" id="mobile-menu">
+              <ul class="flex flex-col font-bold md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium items-center gap-2 py-10 h-full justify-between">
+                <li>
+                  <%= link_to "Categories", categories_path %>
+                </li>
+                <li class="bg-red-700 w-full text-center py-3">
+                  <%= button_to "Sign out", destroy_user_session_path, :method => :delete, class: 'text-red-50 font-bold'%>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
     <% end %>
+
     <%= yield %>
+
+    <script src="https://unpkg.com/flowbite@1.4.2/dist/flowbite.js"></script>
+    <script>
+      const mobileMenuContainer = document.getElementById("mobile-menu-backdrop")
+      const mobileMenu = document.getElementById("mobile-menu")
+      document.getElementById("hamburgerMenuBtn").addEventListener("click", () => {
+        mobileMenuContainer.classList.remove('-translate-x-full');
+      });
+      [mobileMenuContainer].forEach((elem) => {
+        elem.addEventListener("click", (e) => {
+          if(e.target.id === "mobile-menu") return;
+          mobileMenuContainer.classList.add('-translate-x-full');
+        })
+      });
+    </script>
   </body>
 </html>

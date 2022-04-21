@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: %i[show edit update destroy]
+  before_action :category_params, only: %i[destroy]
 
   # GET /payments or /payments.json
   def index
@@ -12,6 +13,7 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   def new
     @payment = Payment.new
+    @user_categories = Category.where(user_id: current_user.id)
   end
 
   # GET /payments/1/edit
@@ -19,11 +21,19 @@ class PaymentsController < ApplicationController
 
   # POST /payments or /payments.json
   def create
-    @payment = Payment.new(payment_params)
+    params = payment_params
+
+    @payment = Payment.new(name: params[:name], amount: params[:amount])
+    @payment.user_id = current_user.id
+    category_ids = params[:category_ids]
+    category_ids.each do |id|
+      category = Category.find(id) unless id == ''
+      @payment.categories.push(category) unless category.nil?
+    end
 
     respond_to do |format|
       if @payment.save
-        format.html { redirect_to payment_url(@payment), notice: 'Payment was successfully created.' }
+        format.html { redirect_to categories_url, notice: 'Payment was successfully created.' }
         format.json { render :show, status: :created, location: @payment }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -48,9 +58,10 @@ class PaymentsController < ApplicationController
   # DELETE /payments/1 or /payments/1.json
   def destroy
     @payment.destroy
+    @category = category_params
 
     respond_to do |format|
-      format.html { redirect_to payments_url, notice: 'Payment was successfully destroyed.' }
+      format.html { redirect_to category_url(@category), notice: 'Payment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,6 +75,10 @@ class PaymentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def payment_params
-    params.require(:payment).permit(:name, :amount)
+    params.require(:payment).permit(:name, :amount, category_ids: [])
+  end
+
+  def category_params
+    params.permit(:id)
   end
 end
